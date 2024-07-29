@@ -8,6 +8,8 @@ function App() {
   let post = 'OTT 콘텐츠 추천';
   let [글제목, 글제목변경] = useState(['순정','액션','고어']);
   let [따봉, 따봉변경] = useState([0,0,0]);
+  // UI의 현재 상태를state로 저장
+  let [modal, setModal] = useState(false);
 
   function 따봉누름(i){
     let copy = [...따봉];
@@ -36,21 +38,26 @@ function App() {
       }}>
         가나다순정렬
       </button>
-      
-      <div className='list'>
-        <h4>{ 글제목[0] } <span onClick={ () => { 따봉누름(0) } }>👍</span> {따봉[0]} </h4>
-        <p>7월 29일 발행</p>
-      </div>
-      <div className='list'>
-        <h4>{ 글제목[1] } <span onClick={ () => { 따봉누름(1) } }>👍</span> {따봉[1]} </h4>
-        <p>7월 29일 발행</p>
-      </div>
-      <div className='list'>
-        <h4>{ 글제목[2] } <span onClick={ () => { 따봉누름(2) } }>👍</span> {따봉[2]} </h4>
-        <p>7월 29일 발행</p>
-      </div>
 
-      <Modal/>
+      {/* array 자료 개수만큼 함수 안의 코드 실행 */}
+      { 
+        글제목.map(function(a, i){
+          return (
+            <div className='list' key={i}>
+              <h4 onClick={()=>{ modal == false ? setModal(true) : setModal(false) }}>
+                { a }
+              </h4>
+              <span onClick={ () => { 따봉누름(i) } }>👍</span> { 따봉[i] }
+              <p>7월 29일 발행</p>
+            </div>
+          )
+        })
+      }
+
+      {
+        // 조건식 ?  참일 때 : 거짓일 때
+        modal == true ? <Modal/> : null
+      }
 
     </div>
   );
