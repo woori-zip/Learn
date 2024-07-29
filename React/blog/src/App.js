@@ -6,7 +6,7 @@ import { useState } from 'react';
 function App() {
 
   let post = 'OTT 콘텐츠 추천';
-  let [글제목, 글제목변경] = useState(['순정','액션','판타지']);
+  let [글제목, 글제목변경] = useState(['순정','액션','고어']);
   let [따봉, 따봉변경] = useState(0);
 
   function 함수(){
@@ -21,9 +21,9 @@ function App() {
       <h4>{ post }</h4>
 
       <span onClick={()=>{
-        let 변경글제목 = [...글제목];
-        변경글제목[0] = '로맨스';
-        글제목변경(변경글제목);
+        let copy = [...글제목];
+        copy[0] = '로맨스';
+        글제목변경(copy);
       }}>
         순정 ➡️ 로맨스
       </span>
