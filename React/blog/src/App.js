@@ -7,10 +7,12 @@ function App() {
 
   let post = 'OTT 콘텐츠 추천';
   let [글제목, 글제목변경] = useState(['순정','액션','고어']);
-  let [따봉, 따봉변경] = useState(0);
+  let [따봉, 따봉변경] = useState([0,0,0]);
 
-  function 함수(){
-    따봉변경(따봉+1);
+  function 따봉누름(i){
+    let copy = [...따봉];
+    copy[i] = 따봉[i]+1;
+    따봉변경(copy);
   }
 
   return (
@@ -27,22 +29,42 @@ function App() {
       }}>
         순정 ➡️ 로맨스
       </span>
+
+      <button onClick={()=>{
+        let 가나다정렬 = [...글제목].sort();
+        글제목변경(가나다정렬);
+      }}>
+        가나다순정렬
+      </button>
       
       <div className='list'>
-        <h4>{ 글제목[0] } <span onClick={ 함수 }>👍</span> {따봉} </h4>
+        <h4>{ 글제목[0] } <span onClick={ () => { 따봉누름(0) } }>👍</span> {따봉[0]} </h4>
         <p>7월 29일 발행</p>
       </div>
       <div className='list'>
-        <h4>{ 글제목[1] } <span onClick={ function() {따봉변경(따봉+1);} }>👍</span> {따봉} </h4>
+        <h4>{ 글제목[1] } <span onClick={ () => { 따봉누름(1) } }>👍</span> {따봉[1]} </h4>
         <p>7월 29일 발행</p>
       </div>
       <div className='list'>
-        <h4>{ 글제목[2] } <span onClick={ () => { 따봉변경(따봉+1) } }>👍</span> {따봉} </h4>
+        <h4>{ 글제목[2] } <span onClick={ () => { 따봉누름(2) } }>👍</span> {따봉[2]} </h4>
         <p>7월 29일 발행</p>
       </div>
 
+      <Modal/>
+
     </div>
   );
+}
+
+// 컴포넌트 만들기
+function Modal() {
+  return (
+    <div className='modal'>
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
 }
 
 export default App;
